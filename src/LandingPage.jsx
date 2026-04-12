@@ -365,6 +365,7 @@ export default function LandingPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap');
         *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{overflow-x:hidden;max-width:100vw;}
         html{scroll-behavior:smooth;}
         ::selection{background:rgba(201,168,76,.28);}
         ::-webkit-scrollbar{width:5px;}
@@ -430,6 +431,23 @@ export default function LandingPage() {
           .hide-mob{display:none!important;}
           .hero-grid{flex-direction:column!important;}
           .foto-wrap img{width:260px!important;height:315px!important;}
+          /* Em mobile, texto justificado vira alinhado à esquerda (evita rios tipográficos) */
+          p{text-align:left!important;}
+          /* Quebra de palavras longas para evitar overflow */
+          p,h1,h2,h3,h4,span,div{word-wrap:break-word;overflow-wrap:break-word;}
+          /* Container seguro: nada pode estourar a largura da viewport */
+          section > div{max-width:100%!important;}
+          /* Seções: padding lateral reduzido */
+          section{padding-left:16px!important;padding-right:16px!important;}
+          /* Caixa da Consultoria: padding muito reduzido para caber confortável */
+          .consultoria-box{padding:28px 18px!important;}
+          /* CTAs extensos (ex: "Solicitar Análise de Viabilidade") podem quebrar em 2 linhas */
+          .btn-shine{padding:13px 20px!important;font-size:13px!important;text-align:center;line-height:1.3;}
+        }
+        @media(max-width:420px){
+          section{padding-left:12px!important;padding-right:12px!important;}
+          .consultoria-box{padding:24px 14px!important;}
+          .btn-shine{font-size:12px!important;padding:12px 16px!important;letter-spacing:.04em!important;}
         }
       `}</style>
 
@@ -764,7 +782,7 @@ export default function LandingPage() {
             <h2 style={h2s}>Consultoria Médica Estratégica Integrada</h2>
           </FadeUp>
           <FadeUp delay={0.1}>
-            <div style={{
+            <div className="consultoria-box" style={{
               background:"linear-gradient(135deg,rgba(201,168,76,.10),rgba(14,32,57,.78),rgba(201,168,76,.06))",
               border:`2px solid ${C.gold}`,
               borderRadius:8,
