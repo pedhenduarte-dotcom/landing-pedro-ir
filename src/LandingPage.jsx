@@ -314,7 +314,58 @@ function PrescricaoCalc() {
       {resultado && (
         <div style={{ marginTop:20 }}>
           <a href={WA_BASE} target="_blank" rel="noreferrer" className="btn-shine">
-            <WaIcon /> Falar com Especialista agora
+            <WaIcon /> Solicite Análise Gratuita
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DoencaCard({ cor, borda, corTexto, icone, label, titulo, desc, items, cor_pill, waBase, trackWA }) {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div style={{
+      background:`linear-gradient(135deg,${cor.replace(",.2",",.06").replace(",.22",",.06").replace(",.1",",.04").replace(",.18",",.06")},rgba(9,24,42,.5))`,
+      border:`1px solid ${cor}`, borderLeft:`4px solid ${borda}`,
+      borderRadius:4, marginBottom:16, overflow:"hidden",
+    }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          width:"100%", background:"none", border:"none", cursor:"pointer",
+          display:"flex", alignItems:"center", gap:16, padding:"22px 24px",
+          textAlign:"left",
+        }}
+      >
+        <span style={{ fontSize:22, color:corTexto, flexShrink:0 }}>{icone}</span>
+        <span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:16, color:"#ede8dc", fontWeight:600, flex:1 }}>{label}</span>
+        <span style={{
+          color:corTexto, fontSize:22, flexShrink:0,
+          transition:"transform .3s", display:"inline-block",
+          transform: open ? "rotate(45deg)" : "none",
+        }}>+</span>
+      </button>
+      {open && (
+        <div style={{ padding:"0 24px 24px" }}>
+          <h3 style={{ fontFamily:"'Playfair Display',serif", color:"#ede8dc", fontSize:"clamp(16px,2.2vw,19px)", fontWeight:700, marginBottom:10, lineHeight:1.4 }}>
+            {titulo}
+          </h3>
+          <p style={{ fontFamily:"'DM Sans',sans-serif", fontSize:16, color:"#c8c2b4", lineHeight:1.85, marginBottom:18, textAlign:"justify" }}>
+            {desc}
+          </p>
+          <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:22 }}>
+            {items.map(d => <span key={d} className={cor_pill}>{d}</span>)}
+          </div>
+          <a
+            href={`${waBase}?text=${encodeURIComponent("Olá, Dr. Pedro! Vim pelo site e gostaria de verificar meu direito à isenção de IR. Minha situação envolve: " + label)}`}
+            target="_blank" rel="noreferrer"
+            className="btn-shine"
+            style={{ fontSize:13 }}
+            onClick={() => trackWA("doenca_" + label.toLowerCase().replace(/\s/g,"_"))}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Solicite Análise Gratuita
           </a>
         </div>
       )}
@@ -466,7 +517,7 @@ export default function LandingPage() {
           section{padding-left:16px!important;padding-right:16px!important;}
           /* Caixa da Consultoria: padding muito reduzido para caber confortável */
           .consultoria-box{padding:28px 18px!important;}
-          /* CTAs extensos (ex: "Solicitar Análise de Viabilidade") podem quebrar em 2 linhas */
+          /* CTAs extensos (ex: "Solicite Análise Gratuita") podem quebrar em 2 linhas */
           .btn-shine{padding:13px 20px!important;font-size:13px!important;text-align:center;line-height:1.3;}
         }
         @media(max-width:420px){
@@ -523,7 +574,7 @@ export default function LandingPage() {
             </FadeUp>
             <FadeUp delay={0.2}>
               <h1 style={{ fontFamily:"'Playfair Display',serif",fontSize:"clamp(28px,4.6vw,50px)",color:"#fff",fontWeight:700,lineHeight:1.18,margin:"26px 0 14px" }}>
-                Você possui ou já teve diagnóstico de doença grave <em style={{ color:C.gold,fontStyle:"italic" }}>e continua pagando Imposto de Renda?</em>
+                Você possui ou já teve diagnóstico de doença grave <span style={{ color:C.gold }}>e continua pagando Imposto de Renda?</span>
               </h1>
             </FadeUp>
             <FadeUp delay={0.25}>
@@ -535,7 +586,7 @@ export default function LandingPage() {
               <div style={{ display:"flex",gap:14,flexWrap:"wrap",marginBottom:44 }}>
                 <a href={WA_BASE} target="_blank" rel="noreferrer" className="btn-shine"
                   onClick={() => trackWA("hero")}>
-                  <WaIcon /> Solicite Análise de Viabilidade
+                  <WaIcon /> Solicite Análise Gratuita
                 </a>
                 <button className="btn-ghost" onClick={() => goto("calculadora")}>Ver minha estimativa</button>
               </div>
@@ -632,161 +683,11 @@ export default function LandingPage() {
                     <GoldIcon name={icon} size={36}/>
                   </div>
                   <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:18,fontWeight:700,marginBottom:10 }}>{t}</h3>
-                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text,lineHeight:1.75,textAlign:"justify" }}>{d}</p>
+                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.text,lineHeight:1.75,textAlign:"justify" }}>{d}</p>
                 </div>
               </FadeUp>
             ))}
           </div>
-        </div>
-      </section>
-
-      <div className="divider" />
-
-      {/* ══ QUAIS DOENÇAS A LEI RECONHECE — escopo médico ══ */}
-      <section id="doencas" style={{ padding:"88px 28px" }}>
-        <div style={{ maxWidth:1160,margin:"0 auto" }}>
-          <FadeUp>
-            <div className="gold-bar" />
-            <h2 style={h2s}>Quais doenças a lei reconhece?</h2>
-            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.text,lineHeight:1.75,maxWidth:720,marginBottom:40,textAlign:"justify" }}>
-              A Lei nº 7.713/88 enumera as enfermidades que geram direito à isenção. O reconhecimento <strong style={{ color:C.offW }}>independe do estágio atual da doença</strong> — basta a existência do diagnóstico.
-            </p>
-          </FadeUp>
-
-          {/* Cura não elimina — abertura conceitual */}
-          <FadeUp delay={0.1}>
-            <div style={{ background:"linear-gradient(135deg,rgba(201,168,76,.08),rgba(9,24,42,.4))",
-              border:"1px solid rgba(201,168,76,.2)",borderRadius:4,padding:"32px 28px",marginBottom:32 }}>
-              <div style={{ display:"flex",gap:16,alignItems:"flex-start",flexWrap:"wrap" }}>
-                <div style={{ color:C.gold,flexShrink:0,display:"flex",alignItems:"center" }}><GoldIcon name="cross" size={36}/></div>
-                <div>
-                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:"clamp(18px,2.5vw,24px)",fontWeight:700,marginBottom:10 }}>
-                    Curou-se do câncer? Passou por um infarto? O direito continua.
-                  </h3>
-                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.text,lineHeight:1.85,textAlign:"justify" }}>
-                    A jurisprudência consolidada do STJ é clara: <strong style={{ color:C.goldL }}>a cura, a remissão ou o controle da doença não eliminam o direito à isenção</strong>. Quem teve câncer, sofreu infarto, implantou stent ou marca-passo — mesmo curado — continua amparado pela lei.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-
-          {/* Cardiopatias */}
-          <FadeUp delay={0.15}>
-            <div style={{ background:"linear-gradient(135deg,rgba(200,80,60,.07),rgba(9,24,42,.5))",
-              border:"1px solid rgba(200,80,60,.22)",borderLeft:"4px solid #c85a3a",
-              borderRadius:4,padding:"32px 28px",marginBottom:32 }}>
-              <div style={{ display:"flex",gap:16,alignItems:"flex-start",flexWrap:"wrap" }}>
-                <div style={{ fontSize:30,flexShrink:0,color:"#e08a6a",lineHeight:1 }}>♥</div>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#e08a6a",textTransform:"uppercase",letterSpacing:".12em",marginBottom:8 }}>Cardiopatia grave — você sabia?</div>
-                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:"clamp(18px,2.5vw,24px)",fontWeight:700,marginBottom:10 }}>
-                    Doença do coração ou procedimento cardíaco pode ser suficiente para a isenção
-                  </h3>
-                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.text,lineHeight:1.85,marginBottom:22,textAlign:"justify" }}>
-                    Quem convive com doença do coração ou passou por procedimento cardíaco frequentemente desconhece que isso pode ser <strong style={{ color:C.goldL }}>suficiente para a obtenção da isenção</strong>. Os casos amplamente reconhecidos pelos Tribunais são:
-                  </p>
-                  <div style={{ display:"flex",flexWrap:"wrap",gap:6 }}>{DOENCAS_CARDIO.map(d => <span key={d} className="dtag dtag-red">{d}</span>)}</div>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-
-          {/* Doenças ocupacionais */}
-          <FadeUp delay={0.2}>
-            <div style={{ background:"linear-gradient(135deg,rgba(70,100,180,.08),rgba(9,24,42,.5))",
-              border:"1px solid rgba(100,130,210,.2)",borderLeft:"4px solid #7a9fd4",
-              borderRadius:4,padding:"32px 28px",marginBottom:48 }}>
-              <div style={{ display:"flex",gap:16,alignItems:"flex-start",flexWrap:"wrap" }}>
-                <div style={{ color:"#7a9fd4",flexShrink:0,display:"flex",alignItems:"center" }}><GoldIcon name="gear" size={36}/></div>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#7a9fd4",textTransform:"uppercase",letterSpacing:".12em",marginBottom:8 }}>Atenção especial</div>
-                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:"clamp(18px,2.5vw,24px)",fontWeight:700,marginBottom:10 }}>
-                    Doenças Ocupacionais e Moléstias Profissionais
-                  </h3>
-                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:15,color:C.text,lineHeight:1.85,marginBottom:22,textAlign:"justify" }}>
-                    Condições desenvolvidas em razão do exercício profissional podem ser enquadradas como moléstia profissional e ensejar o direito à isenção. Cada caso exige análise individual.
-                  </p>
-                  <div style={{ display:"flex",flexWrap:"wrap",gap:6 }}>{DOENCAS_OCUP.map(d => <span key={d} className="dtag dtag-blue">{d}</span>)}</div>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-
-          {/* Nefropatia grave */}
-          <FadeUp delay={0.22}>
-            <div style={{ background:"linear-gradient(135deg,rgba(60,130,160,.07),rgba(9,24,42,.5))",
-              border:"1px solid rgba(80,160,200,.2)",borderLeft:"4px solid #4a9fc0",
-              borderRadius:4,padding:"32px 28px",marginBottom:32 }}>
-              <div style={{ display:"flex",gap:16,alignItems:"flex-start",flexWrap:"wrap" }}>
-                <div style={{ color:"#4a9fc0",flexShrink:0,display:"flex",alignItems:"center" }}><GoldIcon name="microscope" size={36}/></div>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#4a9fc0",textTransform:"uppercase",letterSpacing:".12em",marginBottom:8 }}>Nefropatia grave</div>
-                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:"clamp(17px,2.3vw,22px)",fontWeight:700,marginBottom:10 }}>
-                    Doença renal grave — incluindo quem está em diálise ou fez transplante
-                  </h3>
-                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text,lineHeight:1.85,marginBottom:20,textAlign:"justify" }}>
-                    A nefropatia grave abrange doenças que comprometem severamente a função renal, com risco à vida. O que determina o direito é a <strong style={{ color:C.goldL }}>gravidade clínica comprovada em laudo</strong>, não o nome da doença de origem. Condições reconhecidas pelos Tribunais:
-                  </p>
-                  <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:8 }}>
-                    {DOENCAS_NEFRO.map(d => (
-                      <div key={d} style={{ display:"flex",alignItems:"center",gap:10 }}>
-                        <span style={{ color:"#4a9fc0",flexShrink:0,fontSize:16 }}>✓</span>
-                        <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text }}>{d}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-
-          {/* Hepatopatia grave */}
-          <FadeUp delay={0.24}>
-            <div style={{ background:"linear-gradient(135deg,rgba(160,110,40,.07),rgba(9,24,42,.5))",
-              border:"1px solid rgba(200,160,70,.2)",borderLeft:`4px solid ${C.gold}`,
-              borderRadius:4,padding:"32px 28px",marginBottom:48 }}>
-              <div style={{ display:"flex",gap:16,alignItems:"flex-start",flexWrap:"wrap" }}>
-                <div style={{ color:C.gold,flexShrink:0,display:"flex",alignItems:"center" }}><GoldIcon name="stethoscope" size={36}/></div>
-                <div style={{ flex:1 }}>
-                  <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:C.gold,textTransform:"uppercase",letterSpacing:".12em",marginBottom:8 }}>Hepatopatia grave</div>
-                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:"clamp(17px,2.3vw,22px)",fontWeight:700,marginBottom:10 }}>
-                    Doença hepática grave — incluindo cirrose, hepatites e transplante de fígado
-                  </h3>
-                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text,lineHeight:1.85,marginBottom:20,textAlign:"justify" }}>
-                    A hepatopatia grave engloba doenças do fígado em estágio avançado que comprometem gravemente sua função. O laudo de hepatologista é essencial para comprovar a gravidade. Condições reconhecidas pelos Tribunais:
-                  </p>
-                  <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:8 }}>
-                    {DOENCAS_HEPATO.map(d => (
-                      <div key={d} style={{ display:"flex",alignItems:"center",gap:10 }}>
-                        <span style={{ color:C.gold,flexShrink:0,fontSize:16 }}>✓</span>
-                        <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text }}>{d}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-
-          {/* Demais doenças — rol completo da Lei */}
-          <FadeUp delay={0.26}>
-            <div style={{ paddingTop:24,borderTop:"1px solid rgba(201,168,76,.12)" }}>
-              <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:C.sub,textTransform:"uppercase",letterSpacing:".12em",marginBottom:18 }}>
-                Demais doenças previstas na Lei nº 7.713/88
-              </div>
-              <div style={{ display:"flex",flexWrap:"wrap",gap:6 }}>{DOENCAS_OUTRAS.map(d => <span key={d} className="dtag">{d}</span>)}</div>
-            </div>
-          </FadeUp>
-
-          <FadeUp delay={0.3}>
-            <div style={{ marginTop:48,textAlign:"center" }}>
-              <a href={WA_BASE} target="_blank" rel="noreferrer" className="btn-shine"
-                style={{ fontSize:13 }} onClick={() => trackWA("doencas")}>
-                <WaIcon size={16}/> Verificar meu enquadramento
-              </a>
-            </div>
-          </FadeUp>
         </div>
       </section>
 
@@ -858,6 +759,95 @@ export default function LandingPage() {
 
       <div className="divider" />
 
+      {/* ══ QUAIS DOENÇAS A LEI RECONHECE — acordeão ══ */}
+      <section id="doencas" style={{ padding:"88px 28px" }}>
+        <div style={{ maxWidth:900,margin:"0 auto" }}>
+          <FadeUp>
+            <div className="gold-bar" />
+            <h2 style={h2s}>Quais doenças a lei reconhece?</h2>
+            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.text,lineHeight:1.8,maxWidth:720,marginBottom:40,textAlign:"justify" }}>
+              A Lei nº 7.713/88 enumera as enfermidades que geram direito à isenção. O reconhecimento <strong style={{ color:C.offW }}>independe do estágio atual da doença</strong> — basta a existência do diagnóstico.
+            </p>
+          </FadeUp>
+
+          <FadeUp delay={0.1}>
+            <div style={{ background:"linear-gradient(135deg,rgba(201,168,76,.08),rgba(9,24,42,.4))",
+              border:"1px solid rgba(201,168,76,.2)",borderRadius:4,padding:"28px 24px",marginBottom:28 }}>
+              <div style={{ display:"flex",gap:14,alignItems:"flex-start",flexWrap:"wrap" }}>
+                <div style={{ color:C.gold,flexShrink:0,display:"flex",alignItems:"center" }}><GoldIcon name="cross" size={32}/></div>
+                <div>
+                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:"clamp(17px,2.3vw,21px)",fontWeight:700,marginBottom:8 }}>
+                    Curou-se do câncer? Passou por um infarto? O direito continua.
+                  </h3>
+                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.text,lineHeight:1.8,textAlign:"justify" }}>
+                    A jurisprudência consolidada do STJ é clara: <strong style={{ color:C.goldL }}>a cura, a remissão ou o controle da doença não eliminam o direito à isenção</strong>. Quem teve câncer, sofreu infarto, implantou stent ou marca-passo — mesmo curado — continua amparado pela lei.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </FadeUp>
+
+          {/* Acordeão */}
+          {[
+            {
+              key:"cardio",
+              cor:"rgba(200,80,60,.22)", borda:"#c85a3a", corTexto:"#e08a6a",
+              icone:"♥", label:"Cardiopatia grave",
+              titulo:"Doença do coração ou procedimento cardíaco pode ser suficiente para a isenção",
+              desc:"Quem convive com doença do coração ou passou por procedimento cardíaco frequentemente desconhece que isso pode ser suficiente para obter a isenção. Os casos amplamente reconhecidos pelos Tribunais:",
+              items: DOENCAS_CARDIO,
+              cor_pill:"dtag dtag-red",
+            },
+            {
+              key:"ocup",
+              cor:"rgba(100,130,210,.2)", borda:"#7a9fd4", corTexto:"#7a9fd4",
+              icone:"⚙", label:"Doenças ocupacionais",
+              titulo:"Condições desenvolvidas no exercício profissional podem gerar isenção",
+              desc:"Condições desenvolvidas em razão do exercício profissional podem ser enquadradas como moléstia profissional e ensejar o direito à isenção. Cada caso exige análise individual.",
+              items: DOENCAS_OCUP,
+              cor_pill:"dtag dtag-blue",
+            },
+            {
+              key:"nefro",
+              cor:"rgba(60,130,160,.2)", borda:"#4a9fc0", corTexto:"#4a9fc0",
+              icone:"◈", label:"Nefropatia grave",
+              titulo:"Doença renal grave — incluindo quem está em diálise ou fez transplante",
+              desc:"A nefropatia grave abrange doenças que comprometem severamente a função renal. O que determina o direito é a gravidade clínica comprovada em laudo, não o nome da doença de origem.",
+              items: DOENCAS_NEFRO,
+              cor_pill:"dtag dtag-blue",
+            },
+            {
+              key:"hepato",
+              cor:"rgba(160,110,40,.18)", borda:C.gold, corTexto:C.gold,
+              icone:"◉", label:"Hepatopatia grave",
+              titulo:"Doença hepática grave — incluindo cirrose, hepatites e transplante de fígado",
+              desc:"A hepatopatia grave engloba doenças do fígado em estágio avançado que comprometem gravemente sua função. O laudo de hepatologista é essencial para comprovar a gravidade.",
+              items: DOENCAS_HEPATO,
+              cor_pill:"dtag",
+            },
+            {
+              key:"outras",
+              cor:"rgba(201,168,76,.1)", borda:"rgba(201,168,76,.35)", corTexto:C.goldL,
+              icone:"✦", label:"Demais doenças da Lei nº 7.713/88",
+              titulo:"Câncer, Parkinson, esclerose múltipla, HIV/AIDS e outras",
+              desc:"O rol completo da lei abrange ainda diversas enfermidades graves que geram direito à isenção total do imposto de renda.",
+              items: DOENCAS_OUTRAS,
+              cor_pill:"dtag",
+            },
+          ].map(({ key,cor,borda,corTexto,icone,label,titulo,desc,items,cor_pill }) => (
+            <FadeUp key={key} delay={0.1}>
+              <DoencaCard
+                cor={cor} borda={borda} corTexto={corTexto}
+                icone={icone} label={label} titulo={titulo}
+                desc={desc} items={items} cor_pill={cor_pill}
+                waBase={WA_BASE} trackWA={trackWA}
+              />
+            </FadeUp>
+          ))}
+        </div>
+      </section>
+      <div className="divider" />
+
       {/* ══ CONSULTORIA MÉDICA ══ */}
       <section style={{ padding:"88px 28px" }}>
         <div style={{ maxWidth:1160,margin:"0 auto" }}>
@@ -897,7 +887,7 @@ export default function LandingPage() {
                     onClick={() => trackWA("consultoria_medica")}
                     className="btn-shine"
                     style={{ display:"inline-flex",alignItems:"center",gap:10 }}>
-                    <WaIcon /> Solicitar Análise de Viabilidade
+                    <WaIcon /> Solicite Análise Gratuita
                   </a>
                 </div>
                 <div style={{ display:"flex",flexDirection:"column",gap:14 }}>
@@ -920,78 +910,6 @@ export default function LandingPage() {
               </div>
             </div>
           </FadeUp>
-        </div>
-      </section>
-
-      <div className="divider" />
-
-      {/* ══ VIAS DE ATUAÇÃO ══ */}
-      <section style={{ background:C.navy2,padding:"88px 28px" }}>
-        <div style={{ maxWidth:1160,margin:"0 auto" }}>
-          <FadeUp>
-            <div className="gold-bar" />
-            <h2 style={h2s}>Como conduzimos o seu caso</h2>
-            <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.text,lineHeight:1.75,maxWidth:640,marginBottom:48,textAlign:"justify" }}>
-              Atuamos pelas duas vias disponíveis. A estratégia é definida caso a caso, buscando sempre o caminho mais eficiente.
-            </p>
-          </FadeUp>
-          <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:24,marginBottom:52 }}>
-            <FadeUp delay={0.1}>
-              <div style={{ ...card,
-                borderTop:`3px solid ${C.gold}`,
-                border:`1px solid rgba(201,168,76,.28)`,
-                borderTopWidth:3,
-                boxShadow:"0 8px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(201,168,76,.08)",
-                background:"linear-gradient(180deg,rgba(201,168,76,.04),rgba(14,32,57,.6))",
-                position:"relative" }}>
-                <div style={{ color:C.gold,marginBottom:16,display:"flex",alignItems:"center" }}><GoldIcon name="scale" size={36}/></div>
-                <div style={{ display:"flex",alignItems:"center",gap:10,marginBottom:12,flexWrap:"wrap" }}>
-                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:20,fontWeight:700 }}>Via Judicial</h3>
-                  <span style={{ background:"rgba(201,168,76,.15)",border:"1px solid rgba(201,168,76,.3)",
-                    color:C.gold,fontFamily:"'DM Sans',sans-serif",fontSize:10,padding:"3px 10px",borderRadius:20,textTransform:"uppercase",letterSpacing:".08em" }}>Quando necessário</span>
-                </div>
-                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text,lineHeight:1.85,textAlign:"justify" }}>
-                  Quando a via administrativa não é pertinente ao caso concreto, ingressamos com ação judicial perante a <strong style={{ color:C.offW }}>Justiça Federal ou Estadual</strong>, pleiteando liminarmente a isenção e restituição dos retroativos.
-                </p>
-              </div>
-            </FadeUp>
-            <FadeUp delay={0.15}>
-              <div style={{ ...card,
-                borderTop:`3px solid ${C.gold}`,
-                border:`1px solid rgba(201,168,76,.28)`,
-                borderTopWidth:3,
-                boxShadow:"0 8px 32px rgba(0,0,0,.35), inset 0 1px 0 rgba(201,168,76,.08)",
-                background:"linear-gradient(180deg,rgba(201,168,76,.04),rgba(14,32,57,.6))",
-                position:"relative" }}>
-                <div style={{ color:C.gold,marginBottom:16,display:"flex",alignItems:"center" }}><GoldIcon name="building" size={36}/></div>
-                <div style={{ display:"flex",alignItems:"center",gap:10,marginBottom:12,flexWrap:"wrap" }}>
-                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:20,fontWeight:700 }}>Via Administrativa</h3>
-                  <span style={{ background:"rgba(201,168,76,.15)",border:"1px solid rgba(201,168,76,.3)",
-                    color:C.gold,fontFamily:"'DM Sans',sans-serif",fontSize:10,padding:"3px 10px",borderRadius:20,textTransform:"uppercase",letterSpacing:".08em" }}>Mais ágil</span>
-                </div>
-                <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text,lineHeight:1.85,marginBottom:16,textAlign:"justify" }}>
-                  Atuamos diretamente junto ao órgão ou autarquia pagadora e, quando cabível, junto à <strong style={{ color:C.offW }}>Receita Federal para a restituição dos valores retidos</strong>.
-                </p>
-                <div className="prec-badge">✦ Recebimento direto — sem necessidade de precatório</div>
-              </div>
-            </FadeUp>
-          </div>
-          {[
-            { n:1,t:"Verificação do enquadramento jurídico",d:"O Dr. Pedro Henrique analisa o vínculo funcional, o tipo de doença e os valores descontados para confirmar o enquadramento legal, bem como realiza a análise de viabilidade do caso." },
-            { n:2,t:"Análise Técnica de Provas",d:"Contamos com o suporte de assistência técnica especializada para revisar a documentação clínica, garantindo que o acervo probatório esteja em estrita conformidade com as exigências legais e a jurisprudência." },
-            { n:3,t:"Definição da estratégia",d:"Com as duas análises concluídas, definimos a via mais eficiente — administrativa (incluindo Receita Federal) ou judicial — e apresentamos o plano de ação com clareza." },
-            { n:4,t:"Protocolo e acompanhamento",d:"Protocolamos o pedido e acompanhamos cada etapa, mantendo o cliente informado até o reconhecimento do direito e o efetivo recebimento dos valores." },
-          ].map(({ n,t,d },i) => (
-            <FadeUp key={n} delay={i*.07}>
-              <div style={{ display:"flex",gap:22,padding:"26px 0",borderBottom:"1px solid rgba(201,168,76,.08)",alignItems:"flex-start" }}>
-                <div className="step-n">{n}</div>
-                <div>
-                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:17,fontWeight:700,marginBottom:7 }}>{t}</h3>
-                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text,lineHeight:1.85,textAlign:"justify" }}>{d}</p>
-                </div>
-              </div>
-            </FadeUp>
-          ))}
         </div>
       </section>
 
@@ -1022,7 +940,7 @@ export default function LandingPage() {
                 </button>
                 {openFaq===i && (
                   <div style={{ paddingBottom:20,paddingRight:32 }}>
-                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text,lineHeight:1.85,textAlign:"justify" }}>{item.a}</p>
+                    <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:16,color:C.text,lineHeight:1.85,textAlign:"justify" }}>{item.a}</p>
                     {i === FAQS.length - 1 && (
                       <div style={{ marginTop:16 }}>
                         <a href={WA_BASE} target="_blank" rel="noreferrer" className="btn-shine"
