@@ -108,10 +108,33 @@ const DOENCAS_CARDIO = [
 ];
 const DOENCAS_OUTRAS = [
   "Neoplasia maligna (câncer)", "Doença de Parkinson", "Esclerose múltipla",
-  "Nefropatia grave", "Hepatopatia grave", "Cegueira (inclusive monocular)",
+  "Cegueira (inclusive monocular)",
   "Paralisia irreversível e incapacitante", "HIV/AIDS", "Hanseníase",
   "Contaminação por radiação", "Fibrose cística", "Tuberculose ativa",
   "Alienação mental", "Espondiloartrose anquilosante",
+];
+
+const DOENCAS_NEFRO = [
+  "Diabetes mellitus com falência renal",
+  "Nefroesclerose grave",
+  "Glomerulonefrites crônicas",
+  "Doença renal policística",
+  "Uropatia obstrutiva",
+  "Nefropatia por analgésico",
+  "Insuficiência renal crônica (estágios 4 e 5)",
+  "Pacientes em hemodiálise ou diálise peritoneal",
+  "Transplantados renais",
+];
+
+const DOENCAS_HEPATO = [
+  "Cirrose hepática",
+  "Hepatite B crônica grave",
+  "Hepatite C crônica grave",
+  "Hepatopatia alcoólica",
+  "Doença hepática gordurosa não alcoólica (NASH avançado)",
+  "Hepatite autoimune",
+  "Hepatite fulminante",
+  "Transplantados hepáticos",
 ];
 const DOENCAS_OCUP = [
   "Surdez ocupacional (PAIR)",
@@ -690,8 +713,64 @@ export default function LandingPage() {
             </div>
           </FadeUp>
 
+          {/* Nefropatia grave */}
+          <FadeUp delay={0.22}>
+            <div style={{ background:"linear-gradient(135deg,rgba(60,130,160,.07),rgba(9,24,42,.5))",
+              border:"1px solid rgba(80,160,200,.2)",borderLeft:"4px solid #4a9fc0",
+              borderRadius:4,padding:"32px 28px",marginBottom:32 }}>
+              <div style={{ display:"flex",gap:16,alignItems:"flex-start",flexWrap:"wrap" }}>
+                <div style={{ color:"#4a9fc0",flexShrink:0,display:"flex",alignItems:"center" }}><GoldIcon name="microscope" size={36}/></div>
+                <div style={{ flex:1 }}>
+                  <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#4a9fc0",textTransform:"uppercase",letterSpacing:".12em",marginBottom:8 }}>Nefropatia grave</div>
+                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:"clamp(17px,2.3vw,22px)",fontWeight:700,marginBottom:10 }}>
+                    Doença renal grave — incluindo quem está em diálise ou fez transplante
+                  </h3>
+                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text,lineHeight:1.85,marginBottom:20,textAlign:"justify" }}>
+                    A nefropatia grave abrange doenças que comprometem severamente a função renal, com risco à vida. O que determina o direito é a <strong style={{ color:C.goldL }}>gravidade clínica comprovada em laudo</strong>, não o nome da doença de origem. Condições reconhecidas pelos Tribunais:
+                  </p>
+                  <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:8 }}>
+                    {DOENCAS_NEFRO.map(d => (
+                      <div key={d} style={{ display:"flex",alignItems:"center",gap:10 }}>
+                        <span style={{ color:"#4a9fc0",flexShrink:0,fontSize:16 }}>✓</span>
+                        <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text }}>{d}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeUp>
+
+          {/* Hepatopatia grave */}
+          <FadeUp delay={0.24}>
+            <div style={{ background:"linear-gradient(135deg,rgba(160,110,40,.07),rgba(9,24,42,.5))",
+              border:"1px solid rgba(200,160,70,.2)",borderLeft:`4px solid ${C.gold}`,
+              borderRadius:4,padding:"32px 28px",marginBottom:48 }}>
+              <div style={{ display:"flex",gap:16,alignItems:"flex-start",flexWrap:"wrap" }}>
+                <div style={{ color:C.gold,flexShrink:0,display:"flex",alignItems:"center" }}><GoldIcon name="stethoscope" size={36}/></div>
+                <div style={{ flex:1 }}>
+                  <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:C.gold,textTransform:"uppercase",letterSpacing:".12em",marginBottom:8 }}>Hepatopatia grave</div>
+                  <h3 style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:"clamp(17px,2.3vw,22px)",fontWeight:700,marginBottom:10 }}>
+                    Doença hepática grave — incluindo cirrose, hepatites e transplante de fígado
+                  </h3>
+                  <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text,lineHeight:1.85,marginBottom:20,textAlign:"justify" }}>
+                    A hepatopatia grave engloba doenças do fígado em estágio avançado que comprometem gravemente sua função. O laudo de hepatologista é essencial para comprovar a gravidade. Condições reconhecidas pelos Tribunais:
+                  </p>
+                  <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:8 }}>
+                    {DOENCAS_HEPATO.map(d => (
+                      <div key={d} style={{ display:"flex",alignItems:"center",gap:10 }}>
+                        <span style={{ color:C.gold,flexShrink:0,fontSize:16 }}>✓</span>
+                        <span style={{ fontFamily:"'DM Sans',sans-serif",fontSize:14,color:C.text }}>{d}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </FadeUp>
+
           {/* Demais doenças — rol completo da Lei */}
-          <FadeUp delay={0.25}>
+          <FadeUp delay={0.26}>
             <div style={{ paddingTop:24,borderTop:"1px solid rgba(201,168,76,.12)" }}>
               <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:C.sub,textTransform:"uppercase",letterSpacing:".12em",marginBottom:18 }}>
                 Demais doenças previstas na Lei nº 7.713/88
@@ -746,6 +825,11 @@ export default function LandingPage() {
             <FadeUp delay={0.2}>
               {result ? (
                 <div style={{ ...card,display:"flex",flexDirection:"column",justifyContent:"center",gap:4 }}>
+                  <div style={{ background:"rgba(220,60,60,.1)",border:"1px solid rgba(220,60,60,.28)",borderLeft:"4px solid #dc3c3c",borderRadius:4,padding:"18px 20px",marginBottom:16 }}>
+                    <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#e07070",textTransform:"uppercase",letterSpacing:".1em",marginBottom:6 }}>⚠ Você já perdeu nos últimos 5 anos</div>
+                    <div style={{ fontFamily:"'Playfair Display',serif",fontSize:38,color:"#e07070",fontWeight:700,lineHeight:1 }}>{fmt(result.mensal * 60)}</div>
+                    <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#a06060",marginTop:6 }}>Valores que podem ser recuperados judicialmente</div>
+                  </div>
                   <div style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:C.sub,textTransform:"uppercase",letterSpacing:".08em" }}>IR retido por mês (estimativa)</div>
                   <div style={{ fontFamily:"'Playfair Display',serif",fontSize:44,color:C.gold,fontWeight:700,lineHeight:1 }}>{fmt(result.mensal)}</div>
                   <div style={{ width:"100%",height:1,background:"rgba(201,168,76,.15)",margin:"20px 0" }} />
@@ -1048,10 +1132,7 @@ export default function LandingPage() {
         <p style={{ fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#383844",lineHeight:1.9,maxWidth:720,margin:"0 auto" }}>
           As informações desta página têm caráter meramente informativo e não constituem consulta jurídica. Os valores da calculadora são estimativas e não substituem análise individual. A atuação profissional observa o Código de Ética e Disciplina da OAB e o Provimento nº 205/2021.
           <br/>
-          <span style={{ color:"#2a2a38" }}>© 2026 · Dr. Pedro Henrique Barbosa dos Santos Duarte ·{" "}
-            <a href="https://cna.oab.org.br/Home/BuscarAdvogado" target="_blank" rel="noreferrer"
-              style={{ color:"#3a3a4a",textDecoration:"underline" }}>OAB/MS nº 23.630</a>
-            {" "}· Campo Grande – MS
+          <span style={{ color:"#2a2a38" }}>© 2026 · Dr. Pedro Henrique Barbosa dos Santos Duarte · OAB/MS nº 23.630 · Campo Grande – MS
           </span>
         </p>
       </footer>
