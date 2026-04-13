@@ -211,7 +211,7 @@ function PrescricaoCalc() {
   for (let a = 2026; a >= 1980; a--) anos.push(a);
 
   const inp2 = {
-    background:"rgba(255,255,255,0.05)", border:"1px solid rgba(201,168,76,0.25)",
+    background:"#0e2039", border:"1px solid rgba(201,168,76,0.25)",
     color:"#ede8dc", padding:"11px 14px", fontSize:14,
     fontFamily:"'DM Sans',sans-serif", outline:"none", borderRadius:2,
     width:"100%", boxSizing:"border-box",
@@ -362,7 +362,7 @@ export default function LandingPage() {
   };
 
   const inp = {
-    width:"100%", background:"rgba(255,255,255,0.04)",
+    width:"100%", background:"#0e2039",
     border:"1px solid rgba(201,168,76,0.2)", color:C.offW,
     padding:"13px 16px", fontSize:15, fontFamily:"'DM Sans',sans-serif",
     outline:"none", boxSizing:"border-box", borderRadius:2,
@@ -490,9 +490,7 @@ export default function LandingPage() {
             <div>
               <div style={{ fontFamily:"'Playfair Display',serif",color:C.offW,fontSize:14,fontWeight:700 }}>Pedro Duarte</div>
               <div style={{ fontFamily:"'DM Sans',sans-serif",color:C.sub,fontSize:10,letterSpacing:".1em",textTransform:"uppercase" }}>
-                <a href="https://cna.oab.org.br/Home/BuscarAdvogado" target="_blank" rel="noreferrer"
-                  style={{ color:"inherit",textDecoration:"none",borderBottom:"1px solid rgba(201,168,76,.3)",paddingBottom:1 }}
-                  title="Verificar registro OAB">OAB/MS 23.630 ↗</a>
+                OAB/MS 23.630
               </div>
             </div>
           </div>
