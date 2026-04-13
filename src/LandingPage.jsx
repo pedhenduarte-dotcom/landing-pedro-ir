@@ -437,6 +437,8 @@ export default function LandingPage() {
           color:#b09a6a;font-family:'DM Sans',sans-serif;font-size:12px;padding:5px 12px;border-radius:20px;margin:3px;}
         .dtag-red{background:rgba(180,80,60,.08);border-color:rgba(200,100,70,.22);color:#c08870;}
         .dtag-blue{background:rgba(70,100,180,.1);border-color:rgba(100,130,210,.25);color:#8aabde;}
+        select option{background:#0e2039 !important;color:#ede8dc !important;}
+        select{appearance:auto;-webkit-appearance:auto;}
         .prec-badge{display:inline-block;background:linear-gradient(135deg,rgba(201,168,76,.18),rgba(201,168,76,.08));
           border:1px solid rgba(201,168,76,.4);color:#e8c97a;font-family:'DM Sans',sans-serif;
           font-size:13px;font-weight:600;padding:8px 16px;border-radius:3px;margin-top:10px;}
