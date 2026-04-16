@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 
-/* ── GA4 ── substitua G-XXXXXXXXXX pelo seu ID real do Google Analytics */
+/* ── GA4 ── substitua G-1EJXXHN26R pelo seu ID real do Google Analytics */
 (function() {
   if (typeof window === "undefined") return;
   const s = document.createElement("script");
   s.async = true;
-  s.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX";
+  s.src = "https://www.googletagmanager.com/gtag/js?id=G-1EJXXHN26R";
   document.head.appendChild(s);
   window.dataLayer = window.dataLayer || [];
   function gtag(){ window.dataLayer.push(arguments); }
   window.gtag = gtag;
   gtag("js", new Date());
-  gtag("config", "G-XXXXXXXXXX");
+  gtag("config", "G-1EJXXHN26R");
 })();
 
 const C = {
