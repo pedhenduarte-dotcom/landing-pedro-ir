@@ -406,12 +406,22 @@ export default function LandingPage() {
       `Olá, Dr. Pedro! Vim pelo site e gostaria de verificar meu direito à isenção de IR por doença grave.\n\n` +
       `📌 Nome: ${form.nome}\n📋 Situação: ${form.situacao}\n📞 Telefone: ${form.tel}`;
     window.open(`${WA_BASE}?text=${encodeURIComponent(msg)}`,"_blank");
-    if (window.gtag) window.gtag("event","formulario_enviado",{ event_category:"conversao" });
+    if (window.gtag) {
+      // GA4 — rastreamento analítico
+      window.gtag("event","formulario_enviado",{ event_category:"conversao" });
+      // Google Ads — disparo de conversão "Clique WhatsApp"
+      window.gtag("event","conversion",{ send_to: "AW-18096652450/hjyQCPKqx50cEKKBlLVD", event_label: "formulario" });
+    }
     setSent(true);
   };
 
   const trackWA = (origem) => {
-    if (window.gtag) window.gtag("event","clique_whatsapp",{ event_category:"conversao", event_label: origem });
+    if (window.gtag) {
+      // GA4 — rastreamento analítico
+      window.gtag("event","clique_whatsapp",{ event_category:"conversao", event_label: origem });
+      // Google Ads — disparo de conversão "Clique WhatsApp"
+      window.gtag("event","conversion",{ send_to: "AW-18096652450/hjyQCPKqx50cEKKBlLVD", event_label: origem });
+    }
   };
 
   const inp = {
