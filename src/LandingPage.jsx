@@ -84,7 +84,7 @@ function GoldIcon({ name, size = 38, strokeWidth = 1.4 }) {
   }
 }
 
-function FadeUp({ children, delay = 0, style = {} }) {
+function FadeUp({ children, delay = 0, style = {}, className = "" }) {
   const ref = useRef(null);
   const [vis, setVis] = useState(false);
   useEffect(() => {
@@ -93,7 +93,7 @@ function FadeUp({ children, delay = 0, style = {} }) {
     return () => obs.disconnect();
   }, []);
   return (
-    <div ref={ref} style={{
+    <div ref={ref} className={className} style={{
       opacity: vis ? 1 : 0,
       transform: vis ? "translateY(0)" : "translateY(30px)",
       transition: `opacity 0.75s ${delay}s ease, transform 0.75s ${delay}s ease`,
@@ -528,6 +528,8 @@ export default function LandingPage() {
           .hero-texto .stats-row{padding-top:20px!important;gap:24px!important;}
           /* Em mobile, texto justificado vira alinhado à esquerda (evita rios tipográficos) */
           p{text-align:left!important;}
+          /* Exceção: subtítulo do hero permanece justificado para borda alinhada */
+          .hero-texto h2{text-align:justify!important;}
           /* Quebra de palavras longas para evitar overflow */
           p,h1,h2,h3,h4,span,div{word-wrap:break-word;overflow-wrap:break-word;}
           /* Container seguro: nada pode estourar a largura da viewport */
