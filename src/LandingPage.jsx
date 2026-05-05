@@ -517,8 +517,15 @@ export default function LandingPage() {
         .hero-texto{order:1;}
         @media(max-width:768px){
           .hide-mob{display:none!important;}
-          .hero-grid{flex-direction:column!important;}
-          .foto-wrap img{width:260px!important;height:315px!important;}
+          .hero-grid{flex-direction:column!important;gap:32px!important;padding:24px 20px 48px!important;}
+          .hero-section{min-height:auto!important;padding-top:56px!important;}
+          .hero-texto{margin-bottom:0!important;}
+          .foto-wrap img{width:200px!important;height:240px!important;}
+          /* Compactar espaços internos do texto do hero no mobile */
+          .hero-texto h1{margin:18px 0 10px!important;font-size:clamp(26px,7vw,32px)!important;}
+          .hero-texto h2{margin-bottom:22px!important;font-size:15px!important;line-height:1.5!important;}
+          .hero-texto .btn-row{margin-bottom:28px!important;}
+          .hero-texto .stats-row{padding-top:20px!important;gap:24px!important;}
           /* Em mobile, texto justificado vira alinhado à esquerda (evita rios tipográficos) */
           p{text-align:left!important;}
           /* Quebra de palavras longas para evitar overflow */
@@ -572,7 +579,7 @@ export default function LandingPage() {
       </nav>
 
       {/* ══ HERO ══ */}
-      <section style={{ minHeight:"100vh",display:"flex",alignItems:"center",position:"relative",overflow:"hidden",paddingTop:68 }}>
+      <section className="hero-section" style={{ minHeight:"100vh",display:"flex",alignItems:"center",position:"relative",overflow:"hidden",paddingTop:68 }}>
         <div style={{ position:"absolute",width:700,height:700,borderRadius:"50%",background:"rgba(201,168,76,.04)",top:-200,right:-200,pointerEvents:"none",filter:"blur(60px)" }} />
         <div style={{ maxWidth:1160,margin:"0 auto",padding:"80px 28px 100px",width:"100%",display:"flex",gap:60,alignItems:"center",flexWrap:"wrap" }} className="hero-grid">
 
@@ -595,7 +602,7 @@ export default function LandingPage() {
               </h2>
             </FadeUp>
             <FadeUp delay={0.3}>
-              <div style={{ display:"flex",gap:14,flexWrap:"wrap",marginBottom:44 }}>
+              <div className="btn-row" style={{ display:"flex",gap:14,flexWrap:"wrap",marginBottom:44 }}>
                 <a href={WA_LINK} target="_blank" rel="noreferrer" className="btn-shine"
                   onClick={() => trackWA("hero")}>
                   <WaIcon /> Solicite Análise Gratuita
@@ -604,7 +611,7 @@ export default function LandingPage() {
               </div>
             </FadeUp>
             <FadeUp delay={0.4}>
-              <div style={{ display:"flex",gap:32,flexWrap:"wrap",borderTop:"1px solid rgba(201,168,76,.1)",paddingTop:28 }}>
+              <div className="stats-row" style={{ display:"flex",gap:32,flexWrap:"wrap",borderTop:"1px solid rgba(201,168,76,.1)",paddingTop:28 }}>
                 {[["5 anos","Retroativo possível"],["Nacional","Atendimento em todo o Brasil"],["2 análises","Jurídica + Médica"]].map(([v,l]) => (
                   <div key={l}>
                     <div style={{ fontFamily:"'Playfair Display',serif",fontSize:22,color:C.gold,fontWeight:700 }}>{v}</div>
