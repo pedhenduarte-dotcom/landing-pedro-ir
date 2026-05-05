@@ -587,20 +587,14 @@ export default function LandingPage() {
 
           {/* TEXTO — order:1 sempre */}
           <div className="hero-texto" style={{ flex:"1 1 440px",minWidth:300 }}>
-            <FadeUp delay={0.1}>
-              <span className="tag-pill">
-                <span style={{ width:6,height:6,background:C.gold,borderRadius:"50%",display:"inline-block" }} />
-                Servidores aposentados · Militares da reserva e reformados · Pensionistas
-              </span>
-            </FadeUp>
             <FadeUp delay={0.2}>
               <h1 style={{ fontFamily:"'Playfair Display',serif",fontSize:"clamp(28px,4.6vw,50px)",color:"#fff",fontWeight:700,lineHeight:1.18,margin:"26px 0 14px" }}>
-                Você possui ou já teve diagnóstico de doença grave <span style={{ color:C.gold }}>e continua pagando Imposto de Renda?</span>
+                Você possui ou já teve diagnóstico de doença grave <span style={{ color:"#fff" }}>e </span><span style={{ color:C.gold }}>continua pagando Imposto de Renda?</span>
               </h1>
             </FadeUp>
             <FadeUp delay={0.25}>
               <h2 style={{ fontFamily:"'Playfair Display',serif",fontSize:"clamp(15px,1.9vw,19px)",color:C.text,fontWeight:400,lineHeight:1.55,marginBottom:32 }}>
-                A legislação prevê a <span style={{ color:C.goldL }}>isenção total do IR</span> para aposentados, pensionistas e militares (reserva ou reformados) que enfrentam ou já enfrentaram enfermidades graves. Além de interromper a cobrança, a lei permite o requerimento da restituição de valores pagos indevidamente nos últimos <span style={{ color:C.goldL }}>5 anos</span>.
+                A lei garante a <span style={{ color:C.goldL }}>isenção total do IR</span> e permite recuperar o que foi pago a mais nos últimos <span style={{ color:C.goldL }}>5 anos</span> — para aposentados, pensionistas e militares com doença grave.
               </h2>
             </FadeUp>
             <FadeUp delay={0.3}>
@@ -609,7 +603,6 @@ export default function LandingPage() {
                   onClick={() => trackWA("hero")}>
                   <WaIcon /> Solicite Análise Gratuita
                 </a>
-                <button className="btn-ghost" onClick={() => goto("calculadora")}>Ver minha estimativa</button>
               </div>
             </FadeUp>
             <FadeUp delay={0.4}>
